@@ -1,5 +1,3 @@
-echo "This script wants a link of a file hoster (rapitgator, filer, ...) that will be remote uploaded to oboom"
-echo "It creates a new folder on oboom where you will be able to find your file"
 read -p "session id: " session
 read -p "name of the folder (please no spaces): " folder
 read -p "link of the file: " link
