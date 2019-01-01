@@ -11,4 +11,7 @@ else
 fi
 
 session=$(curl -s "https://www.oboom.com/1/login?auth=$username&pass=$passwordhash&source=1" | jq -r '.[1].session')
+timestamp=$(date +%s)
+echo "$timestamp|$session" >> session.txt
+echo "Created file \033[32msession.txt\033[0m to save your session-id. Other script can now automatically login."
 echo "Your session-id is \033[32m$session\033[0m."

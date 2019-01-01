@@ -1,4 +1,18 @@
-read -p "session id: " session
+if [ -f session.txt ]; then
+  timestampnow=$(date +%s)
+  timestampold=$(cat session.txt | cut -d "|" -f1)
+  difference=$(($timestampnow - $timestampold))
+  if [ $difference -le 1800 ]; then
+    #session-id is only 30 minutes = 1800 seconds valid.
+    session=$(cat session.txt | cut -d "|" -f2)
+  else
+    echo "Your session-ID is not valid anymore. Please get a new one with login.sh"
+  fi
+else
+  echo "File \033[32msession.txt\033[0m not found."
+  echo "Please get a session-ID from login.sh"
+  exit
+fi
 
 i=3
 
