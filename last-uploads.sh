@@ -22,4 +22,8 @@ while [ "$state" != "null" ]; do
   state=$(curl -s -d "token=$session" "https://api.oboom.com/1/remote/lsall" | jq -r ".[$i] | .[0].state")
 done
 
-rm upload-state.txt
+if [ -f upload-state.txt ]; then
+  rm upload-state.txt
+else
+  echo "No uploads found."
+fi
