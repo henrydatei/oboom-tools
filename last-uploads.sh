@@ -16,26 +16,26 @@ else
   exit
 fi
 
-i=3
-
-state=$(curl -s -d "token=$session" "https://api.oboom.com/1/remote/lsall" | jq -r ".[$i] | .[0].state")
+i=0
+curl -s -d "token=$session" "https://api.oboom.com/1/remote/lsall" >> upload-state.txt
+state=$(cat upload-state.txt | jq -r ".[3] | .[$i].state")
 
 while [ "$state" != "null" ]; do
-  curl -s -d "token=$session" "https://api.oboom.com/1/remote/lsall" >> upload-state.txt
-  state=$(cat upload-state.txt | jq -r ".[$i] | .[0].state")
-  url=$(cat upload-state.txt | jq -r ".[$i] | .[0].url")
+  state=$(cat upload-state.txt | jq -r ".[3] | .[$i].state")
+  url=$(cat upload-state.txt | jq -r ".[3] | .[$i].url")
   if [ "$state" == "complete" ]; then
-    name=$(cat upload-state.txt | jq -r ".[$i] | .[0].name")
-    size=$(cat upload-state.txt | jq -r ".[$i] | .[0].size")
-    item=$(cat upload-state.txt | jq -r ".[$i] | .[0].item")
+    name=$(cat upload-state.txt | jq -r ".[3] | .[$i].name")
+    size=$(cat upload-state.txt | jq -r ".[3] | .[$i].size")
+    item=$(cat upload-state.txt | jq -r ".[3] | .[$i].item")
     echo "\033[32m$state\033[0m $name ($item), size: $size, url: \033[34m$url\033[0m"
   else
-    loadedsize=$(cat upload-state.txt | jq -r ".[$i] | .[0].loaded_size")
-    speed=$(cat upload-state.txt | jq -r ".[$i] | .[0].speed")
-    echo "\033[33m$state\033[0m, loaded size: $loadedsize, speed: $speed, url: \033[34m$url\033[0m"
+    loadedsize=$(cat upload-state.txt | jq -r ".[3] | .[$i].loaded_size")
+    speed=$(cat upload-state.txt | jq -r ".[3] | .[$i].speed")
+    started_time=$(cat upload-state.txt | jq -r ".[3] | .[$i].ctime")
+    echo "\033[33m$state\033[0m, loaded size: $loadedsize, speed: $speed, running since: $started_time, url: \033[34m$url\033[0m"
   fi
   i=$(($i + 1))
-  state=$(curl -s -d "token=$session" "https://api.oboom.com/1/remote/lsall" | jq -r ".[$i] | .[0].state")
+  state=$(cat upload-state.txt | jq -r ".[3] | .[$i].state")
 done
 
 if [ -f upload-state.txt ]; then
