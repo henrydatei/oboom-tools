@@ -26,6 +26,7 @@ else
   folderid=$(curl -s "https://api.oboom.com/1/mkdir?token=$session&parent=1&name=$folder" | jq -r '.[1]')
   echo "Created folder \033[32m$folder\033[0m with id \033[32m$folderid\033[0m."
   for line in $(cat $file); do
+    echo "Started upload of \033[34m$line\033[0m"
     curl -s -d "token=$session" -d "remotes=[{\"url\":\"$line\",\"parent\":\"$folderid\"}]" "https://api.oboom.com/1/remote/add" >> /dev/null
   done
 fi
