@@ -10,5 +10,11 @@ Your username and the password hash is saved in a file named `account.txt`. The 
 ### remote-upload.sh
 With this script you can remote-upload files to oboom. It's very useful if you have a rapitgator- (or other file hoster-) link that you want to download. "Upload" this link to oboom and oboom will download the file. After that you can download your files from oboom.
 
+### remote-upload-list.sh
+Does basically the same as `remote-upload.sh` but remotes upload a complete list of links.
+
 ### last-uploads.sh
 Displays details about your last uploads.
+
+### mkdir.sh
+Creates a new directory.
