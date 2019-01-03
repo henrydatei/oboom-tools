@@ -21,5 +21,5 @@ Creates a new directory.
 
 
 ### ideas for new scripts
-- [] empty recycle bin
-- [] restart failed remote uploads
+- [ ] empty recycle bin
+- [ ] restart failed remote uploads
