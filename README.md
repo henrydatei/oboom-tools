@@ -18,3 +18,8 @@ Displays details about your last uploads.
 
 ### mkdir.sh
 Creates a new directory.
+
+
+### ideas for new scripts
+- [] empty recycle bin
+- [] restart failed remote uploads
