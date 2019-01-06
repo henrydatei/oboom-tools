@@ -1,3 +1,4 @@
+#!/bin/sh
 if [ -f session.txt ]; then
   timestampnow=$(date +%s)
   timestampold=$(cat session.txt | cut -d "|" -f1)
