@@ -28,3 +28,4 @@ Deletes all files and folders from the recycle bin. You'll need your security pi
 ### ideas for new scripts
 - [x] empty recycle bin
 - [ ] restart failed remote uploads
+- [ ] download files
