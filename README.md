@@ -17,7 +17,7 @@ Does basically the same as `remote-upload.sh` but remote-uploads a complete list
 Displays details about your last uploads.
 
 ### mkdir.sh
-Creates a new directory.
+Creates a new directory in root.
 
 ### security-pin.sh
 Looks if you have a security pin set. If not, oboom will send you one via e-mail. You need a security pin for removing files from the recycle bin.
@@ -25,7 +25,10 @@ Looks if you have a security pin set. If not, oboom will send you one via e-mail
 ### empty-recycle-bin.sh
 Deletes all files and folders from the recycle bin. You'll need your security pin.
 
+### restart-uploads.sh
+Scans for failed remote-uploads, removes them from the queue and adds them to the queue again.
+
 ### ideas for new scripts
 - [x] empty recycle bin
-- [ ] restart failed remote uploads
+- [x] restart failed remote uploads
 - [ ] download files
