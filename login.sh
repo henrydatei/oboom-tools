@@ -1,4 +1,7 @@
 #!/bin/sh
+if [ -f session.txt ]; then
+  rm session.txt
+fi
 if [ -f account.txt ]; then
   echo "Login information found in \033[32maccount.txt\033[0m."
   username=$(cat account.txt | cut -d "|" -f1)
