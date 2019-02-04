@@ -2,10 +2,7 @@
 
 Bundle of shell scripts to manage your OBOOM-account via the OBOOM-api. See [https://www.oboom.com/api/](https://www.oboom.com/api/). All scripts are written in **shell, not in bash**! You can start then via `sh script.sh` or `./script.sh` (maybe you have to make them executable with `chmod +x script.sh`).
 
-### login.sh
-This script gives you a session-key (or token) generated from your account credentials. The session-key is required for all other api requests. The script uses your e-mail adress and a pbkdf2 hash of your password. Currently I'm not able to implement pbkdf2 in shell. To get the pbkdf2 hash of your password please use an other program. I use [http://anandam.name/pbkdf2/](http://anandam.name/pbkdf2/) with 1000 iterations and 16 bytes for the key. The salt is your reversed password.
-
-Your username and the password hash is saved in a file named `account.txt`. The session-id is saved with a timestamp in `session.txt`. Other scripts use this to get the session-id automatically. Please note that your session-id is only 30 minutes valid. After that you have to run `login.sh` again to get a new session-id
+For the documentation please visit the wiki!
 
 ### remote-upload.sh
 With this script you can remote-upload files to oboom. It's very useful if you have a rapitgator- (or other file hoster-) link that you want to download. "Upload" this link to oboom and oboom will download the file. After that you can download your files from oboom.
