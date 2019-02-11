@@ -61,6 +61,7 @@ Running through your files and folders and getting information about them. Outpu
   - owner
 
 ### download-links.txt
+**It seems to be that this script isn't working anymore**
 After running `list-all-files.sh` this script searches for an entered keyword in `files.txt` or `folders.txt`. After that it will create download links (for all found results) which you can put into JDownloader or anything else.
 
 ### ideas for new scripts
