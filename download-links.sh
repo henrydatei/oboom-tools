@@ -31,7 +31,7 @@ if [ -f files.txt ] && [ -f folders.txt ]; then
     while read -r line; do
       name=$(echo "$line" | cut -d "|" -f1)
       id=$(echo "$line" | cut -d "|" -f6)
-      echo "Name: $name ($id)"
+      echo "  $name ($id)"
     done < searchresult.txt
     echo "Do you want to create download links? They will be saved in \033[32mdownload-links.txt\033[0m. (Y/n)"
     read createLinks
@@ -84,7 +84,7 @@ if [ -f files.txt ] && [ -f folders.txt ]; then
       name=$(echo "$line" | cut -d "|" -f1)
       id=$(echo "$line" | cut -d "|" -f6)
       ContainingFiles=$(cat files.txt | grep "$id" | wc -l | bc)
-      echo "Name: $name ($id), containing file(s): $ContainingFiles"
+      echo "  Name: $name ($id), containing file(s): $ContainingFiles"
     done < searchresult.txt
     echo "Do you want to create download links? They will be saved in \033[32mdownload-links.txt\033[0m. (Y/n)"
     read createLinks
