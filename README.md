@@ -60,7 +60,10 @@ Running through your files and folders and getting information about them. Outpu
   - mime
   - owner
 
+### download-links.txt
+After running `list-all-files.sh` this script searches for an entered keyword in `files.txt` or `folders.txt`. After that it will create download links (for all found results) which you can put into JDownloader or anything else.
+
 ### ideas for new scripts
 - [x] empty recycle bin
 - [x] restart failed remote uploads
-- [ ] download files
+- [x] download files
