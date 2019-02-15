@@ -23,7 +23,7 @@ if [ -f files.txt ] && [ -f folders.txt ]; then
   if [ "$type" = "f" ]; then
     # download files
     NumberOfFiles=$(cat files.txt | wc -l | bc)
-    echo "\033[32m$NumberOfFiles\033[0m folder(s) available. Please type the name of the file."
+    echo "\033[32m$NumberOfFiles\033[0m files(s) available. Please type the name of the file."
     read search
     cat files.txt | grep "$search" > searchresult.txt
     NumberOfSearchResults=$(cat searchresult.txt | wc -l | bc)
