@@ -79,6 +79,10 @@ while [ "$entry" != "null" ]; do
     owner=$(cat tree.json | jq -r ".[1] | .[$i].owner")
     echo "$name|$root|$state|$user|$ddl|$id|$ctime|$parent|$downloads|$mtime|$atime|$size|$thumb_320|$mime|$owner" >> files.txt
   fi
+  if [ $(($i % 100)) -eq 0 ]; then
+    #only show status every 100 files
+    echo "Found \033[32m$i\033[0m files..."
+  fi
   i=$(echo "$i + 1" | bc)
   entry=$(cat tree.json | jq ".[1] | .[$i]")
 done

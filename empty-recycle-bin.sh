@@ -41,10 +41,6 @@ while [ "$root" != "null" ]; do
     # add folders to queue for recursive deleting
     echo "$name|$id" >> recycle-bin.txt
   fi
-  if [ $(($i % 100)) -eq 0 ]; then
-    #only show status every 100 files
-    echo "Found \033[32m$i\033[0m files."
-  fi
   i=$(echo "$i + 1" | bc)
 done
 rm tree.json
