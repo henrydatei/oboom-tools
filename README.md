@@ -7,12 +7,8 @@ For the documentation please visit the wiki!
 ### remote-upload.sh
 With this script you can remote-upload files to oboom. It's very useful if you have a rapitgator- (or other file hoster-) link that you want to download. "Upload" this link to oboom and oboom will download the file. After that you can download your files from oboom.
 
-**It seems to be that oboom has currently some problems with the remote-upload. I'm not sure when they will fix it.**
-
 ### remote-upload-list.sh
 Does basically the same as `remote-upload.sh` but remote-uploads a complete list of links.
-
-**It seems to be that oboom has currently some problems with the remote-upload. I'm not sure when they will fix it.**
 
 ### last-uploads.sh
 Displays details about your last uploads.
@@ -61,7 +57,6 @@ Running through your files and folders and getting information about them. Outpu
   - owner
 
 ### download-links.txt
-**It seems to be that this script isn't working anymore**
 After running `list-all-files.sh` this script searches for an entered keyword in `files.txt` or `folders.txt`. After that it will create download links (for all found results) which you can put into JDownloader or anything else.
 
 ### ideas for new scripts
