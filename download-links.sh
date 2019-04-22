@@ -47,7 +47,7 @@ if [ -f files.txt ] && [ -f folders.txt ]; then
           # everything ok
           dlDomain=$(echo "$result" | jq -r '.[1]')
           dlToken=$(echo "$result" | jq -r '.[2]')
-          echo "https://$dlDomain/dlh?ticket=$dlToken" >> download-links.txt
+          echo "https://$dlDomain/1/dlh?ticket=$dlToken" >> download-links.txt
         else
           # maybe some problems
           if [ "$errorid" -eq 503 ]; then
@@ -58,7 +58,7 @@ if [ -f files.txt ] && [ -f folders.txt ]; then
               # retry successful
               dlDomain=$(echo "$result" | jq -r '.[1]')
               dlToken=$(echo "$result" | jq -r '.[2]')
-              echo "https://$dlDomain/dlh?ticket=$dlToken" >> download-links.txt
+              echo "https://$dlDomain/1/dlh?ticket=$dlToken" >> download-links.txt
             else
               echo "Problems! Error code: $errorid for file $filename"
               echo "$result"
@@ -107,7 +107,7 @@ if [ -f files.txt ] && [ -f folders.txt ]; then
             # everything ok
             dlDomain=$(echo "$result" | jq -r '.[1]')
             dlToken=$(echo "$result" | jq -r '.[2]')
-            echo "https://$dlDomain/dlh?ticket=$dlToken" >> download-links.txt
+            echo "https://$dlDomain/1/dlh?ticket=$dlToken" >> download-links.txt
           else
             # maybe some problems
             if [ "$errorid" -eq 503 ]; then
@@ -118,7 +118,7 @@ if [ -f files.txt ] && [ -f folders.txt ]; then
                 # retry successful
                 dlDomain=$(echo "$result" | jq -r '.[1]')
                 dlToken=$(echo "$result" | jq -r '.[2]')
-                echo "https://$dlDomain/dlh?ticket=$dlToken" >> download-links.txt
+                echo "https://$dlDomain/1/dlh?ticket=$dlToken" >> download-links.txt
               else
                 echo "Problems! Error code: $errorid for file $filename"
                 echo "$result"
