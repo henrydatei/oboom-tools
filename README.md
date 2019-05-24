@@ -4,15 +4,6 @@ Bundle of shell scripts to manage your OBOOM-account via the OBOOM-api. See [htt
 
 For the documentation please visit the wiki!
 
-### remote-upload.sh
-With this script you can remote-upload files to oboom. It's very useful if you have a rapidgator- (or other file hoster-) link that you want to download. "Upload" this link to oboom and oboom will download the file. After that you can download your files from oboom.
-
-### remote-upload-list.sh
-Does basically the same as `remote-upload.sh` but remote-uploads a complete list of links.
-
-### last-uploads.sh
-Displays details about your last uploads.
-
 ### mkdir.sh
 Creates a new directory in root.
 
