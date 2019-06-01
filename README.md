@@ -4,6 +4,13 @@ Bundle of shell scripts to manage your OBOOM-account via the OBOOM-api. See [htt
 
 For the documentation please visit the wiki!
 
+## Prerequisites
+
+These scripts use the following packages, so please ensure that you've installed them
+- jq
+- bc
+- curl
+
 ### mkdir.sh
 Creates a new directory in root.
 
