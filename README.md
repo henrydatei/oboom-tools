@@ -60,5 +60,5 @@ After running `list-all-files.sh` this script searches for an entered keyword in
 ### get-remote-upload-links.sh
 Prints out all the links which were in the remote upload queue.
 
-### ideas for new scripts
-- [ ] abort all remote uploads
+### abort-failed-uploads.sh
+Aborts all failed remote uploads.
