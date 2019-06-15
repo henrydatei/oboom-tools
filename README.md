@@ -62,3 +62,9 @@ Prints out all the links which were in the remote upload queue.
 
 ### abort-failed-uploads.sh
 Aborts all failed remote uploads.
+
+### disk-usage.sh
+Displays information about the amount of files and the used space in your OBOOM-account. `-1` means that you have so many files/bytes used that OBOOM doesn't want to calculate that.
+
+### get-folder-size.sh <folderID>
+This will display the size of the folder, calculated as the sum of the sizes of all files in it. The script will need an input parameter, the folderID, which can be accessed by right-clicking in the webGUI on a folder an clicking "export links". The 8-digit mixture of letters and numbers after "folder/" is the folderID.
