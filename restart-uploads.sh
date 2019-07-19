@@ -23,7 +23,7 @@ state=$(cat upload-state.txt | jq -r ".[3] | .[$i].state")
 
 while [ "$state" != "null" ]; do
   state=$(cat upload-state.txt | jq -r ".[3] | .[$i].state")
-  if [ "$state" == "failed" ] || [ "$state" == "retry" ]; then
+  if [ "$state" = "failed" ] || [ "$state" = "retry" ]; then
     url=$(cat upload-state.txt | jq -r ".[3] | .[$i].url")
     id=$(cat upload-state.txt | jq -r ".[3] | .[$i].id")
     parent=$(cat upload-state.txt | jq -r ".[3] | .[$i].parent")

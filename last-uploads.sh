@@ -24,19 +24,19 @@ state=$(cat upload-state.txt | jq -r ".[3] | .[$i].state")
 while [ "$state" != "null" ]; do
   state=$(cat upload-state.txt | jq -r ".[3] | .[$i].state")
   url=$(cat upload-state.txt | jq -r ".[3] | .[$i].url")
-  if [ "$state" == "complete" ]; then
+  if [ "$state" = "complete" ]; then
     name=$(cat upload-state.txt | jq -r ".[3] | .[$i].name")
     size=$(cat upload-state.txt | jq -r ".[3] | .[$i].size")
     item=$(cat upload-state.txt | jq -r ".[3] | .[$i].item")
     echo "\033[32m$state\033[0m $name ($item), size: $size, url: \033[34m$url\033[0m"
   fi
-  if [ "$state" == "pending" ] || [ "$state" == "working" ]; then
+  if [ "$state" = "pending" ] || [ "$state" = "working" ]; then
     loadedsize=$(cat upload-state.txt | jq -r ".[3] | .[$i].loaded_size")
     speed=$(cat upload-state.txt | jq -r ".[3] | .[$i].speed")
     started_time=$(cat upload-state.txt | jq -r ".[3] | .[$i].ctime")
     echo "\033[33m$state\033[0m, loaded size: $loadedsize, speed: $speed, running since: $started_time, url: \033[34m$url\033[0m"
   fi
-  if [ "$state" == "failed" ] || [ "$state" == "retry" ]; then
+  if [ "$state" = "failed" ] || [ "$state" = "retry" ]; then
     loadedsize=$(cat upload-state.txt | jq -r ".[3] | .[$i].loaded_size")
     last_error=$(cat upload-state.txt | jq -r ".[3] | .[$i].last_error")
     echo "\033[31m$state\033[0m, error: $last_error, loaded size: $loadedsize, url: \033[34m$url\033[0m"
