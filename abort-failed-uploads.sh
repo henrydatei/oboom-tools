@@ -23,7 +23,7 @@ state=$(cat upload-state.txt | jq -r ".[3] | .[$i].state")
 
 while [ "$state" != "null" ]; do
   state=$(cat upload-state.txt | jq -r ".[3] | .[$i].state")
-  if [ "$state" == "failed" ] || [ "$state" == "retry" ]; then
+  if [ "$state" = "failed" ] || [ "$state" = "retry" ]; then
     id=$(cat upload-state.txt | jq -r ".[3] | .[$i].id")
     echo "Abort id: $id"
     curl -s "https://api.oboom.com/1/remote/rm?token=$session&remotes=$id" >> /dev/null
