@@ -21,7 +21,7 @@ folderid=$1
 # get name of folder
 name=$(curl -s "https://api.oboom.com/1/ls?token=$session&item=$folderid" | jq '.[1].name')
 
-function calcFolderSize() {
+calcFolderSize() {
   sum=0
   touch $1.txt
 
@@ -34,7 +34,7 @@ function calcFolderSize() {
   rm $1.txt
 }
 
-function calcFolderSize2() {
+calcFolderSize2() {
   sum=0
   touch Type-$1.txt
   touch ID-$1.txt
