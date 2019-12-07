@@ -22,15 +22,15 @@ folderid=$1
 name=$(curl -s "https://api.oboom.com/1/ls?token=$session&item=$folderid" | jq '.[1].name')
 
 calcFolderSize() {
-  sum=0
+  totalbytes=0
   touch $1.txt
 
   curl -s "https://api.oboom.com/1/ls?token=$session&item=$1" | jq '.[2] | .[].size' >> $1.txt
   while read line; do
-    sum=$(echo "$sum + $line" | bc)
+    totalbytes=$(echo "$totalbytes + $line" | bc)
   done < $1.txt
 
-  echo "$sum"
+  echo "$totalbytes"
   rm $1.txt
 }
 
@@ -41,20 +41,28 @@ calcFolderSize2() {
 
   curl -s "https://api.oboom.com/1/ls?token=$session&item=$1" | jq -r '.[2] | .[].type' >> Type-$1.txt
   curl -s "https://api.oboom.com/1/ls?token=$session&item=$1" | jq -r '.[2] | .[].id' >> ID-$1.txt
-  while read line; do
-    i=1
-    type=$(cat Type-$1.txt | head -n $i | tail -n 1)
-    if [ "$type" = "file" ]; then
-      # current line is a file
-      size=$(curl -s "https://api.oboom.com/1/info?token=$session&items=$line" | jq '.[1] | .[].size')
-      sum=$(echo "$sum + $size" | bc)
-    else
-      # current line is a folder
-      size=$(calcFolderSize2 $line)
-      sum=$(echo "$sum + $size" | bc)
-    fi
-    i=$(echo "$i + 1" | bc)
-  done < ID-$1.txt
+
+  if [ -z $(cat Type-$1.txt | grep "folder") ]; then
+    # no folder in current directory -> use calcFolderSize()
+    size=$(calcFolderSize $1)
+    sum=$(echo "$sum + $size" | bc)
+  else
+    # at least one folder in current directory
+    while read line; do
+      i=1
+      type=$(cat Type-$1.txt | head -n $i | tail -n 1)
+      if [ "$type" = "file" ]; then
+        # current line is a file
+        size=$(curl -s "https://api.oboom.com/1/info?token=$session&items=$line" | jq '.[1] | .[].size')
+        sum=$(echo "$sum + $size" | bc)
+      else
+        # current line is a folder
+        size=$(calcFolderSize2 $line)
+        sum=$(echo "$sum + $size" | bc)
+      fi
+      i=$(echo "$i + 1" | bc)
+    done < ID-$1.txt
+  fi
 
   rm Type-$1.txt
   rm ID-$1.txt
