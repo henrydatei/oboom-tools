@@ -41,8 +41,9 @@ calcFolderSize2() {
 
   curl -s "https://api.oboom.com/1/ls?token=$session&item=$1" | jq -r '.[2] | .[].type' >> Type-$1.txt
   curl -s "https://api.oboom.com/1/ls?token=$session&item=$1" | jq -r '.[2] | .[].id' >> ID-$1.txt
-
-  if [ -z $(cat Type-$1.txt | grep "folder") ]; then
+	
+	folder=$(cat Type-$1.txt | grep "folder")
+  if [ -z "$folder" ]; then
     # no folder in current directory -> use calcFolderSize()
     size=$(calcFolderSize $1)
     sum=$(echo "$sum + $size" | bc)
