@@ -1,6 +1,6 @@
 # oboom-tools
 
-Bundle of shell scripts to manage your OBOOM-account via the OBOOM-api. See [https://www.oboom.com/api/](https://www.oboom.com/api/). All scripts are written in **shell, not in bash**! You can start then via `sh script.sh` or `./script.sh` (maybe you have to make them executable with `chmod +x script.sh`).
+Bundle of shell scripts to manage your OBOOM-account via the OBOOM-api. See [https://www.oboom.com/api/](https://www.oboom.com/api/). You can start then via `sh script.sh` or `./script.sh` (maybe you have to make them executable with `chmod +x script.sh`).
 
 For the documentation please visit the wiki!
 
@@ -69,5 +69,5 @@ Displays information about the amount of files and the used space in your OBOOM-
 ### get-folder-size.sh <folderID>
 This will display the size of the folder, calculated as the sum of the sizes of all files and subfolders in it. The script will need an input parameter, the folderID, which can be accessed by right-clicking in the webGUI on a folder an clicking "export links". The 8-digit mixture of letters and numbers after "folder/" is the folderID.
 
-### analyse-folder.sh <folderID> <NumberOfPartsThatShouldBeInThere>
-This script will go through your folder looking for rar archives splitted into parts. It will find duplicate parts and parts that are missing. The `NumberOfPartsThatShouldBeInThere` argument will prevent the script from searching for parts that can't be in there.
+### analyse-folder.sh <folderID> [NumberOfPartsThatShouldBeInThere]
+This script will go through your folder looking for rar archives splitted into parts. It will find duplicate parts and parts that are missing. The `NumberOfPartsThatShouldBeInThere` is optional; the script can search for the file with the smallest size and take the part-number from there. It will give you an error if there is no smalles file.

@@ -22,12 +22,35 @@ linecounter=1
 folderid=$1
 numberofparts=$2
 
-curl -s -d "token=$session" "https://api.oboom.com/1/ls?item=$folderid" | jq -r '.[2] | .[] | .name' | sort > names_raw.txt
+curl -s -d "token=$session" "https://api.oboom.com/1/ls?item=$folderid" | jq -r '.[2] | .[] | select(.name | contains("part"))' > raw.txt
+cat raw.txt | jq -r '.name' | sort > names_raw.txt
 
 # remove duplicate line
 echo "\033[32mDuplicate parts\033[0m"
 cat names_raw.txt | uniq -d | rev | cut -d "." -f2 | rev
+cat names_raw.txt | uniq -d | rev | cut -d "." -f2 | rev > duplicates.txt
 cat names_raw.txt | uniq > names.txt
+while read line; do
+  number=$(echo $line | cut -c 5-)
+  id=$(cat raw.txt | jq -r "select(.name | contains(\"part$number\")) | .id" | tail -n 1)
+  echo "removing part$number with id $id ..."
+  curl -s -d "token=$session" "https://api.oboom.com/1/rm?items=$id" > /dev/null
+done < duplicates.txt
+
+if [ -z "$2" ]; then
+  curl -s -d "token=$session" "https://api.oboom.com/1/ls?item=$folderid" | jq -r '.[2] | .[] | select(.name | contains("part"))' > raw.txt
+  echo "Looking for smallest file in \033[32m$folderid\033[0m"
+  SizeSmallestFile=$(cat raw.txt | jq -s 'sort_by(.size) | .[0].size')
+  SizeSecondSmallestFile=$(cat raw.txt | jq -s 'sort_by(.size) | .[1].size')
+  if [ $SizeSmallestFile -lt $SizeSecondSmallestFile ]; then
+    # we've found a smallest file
+    numberofparts=$(cat raw.txt | jq -s -r 'sort_by(.size) | .[0].name' | rev | cut -d "." -f2 | rev | cut -c 5- | bc)
+    echo "Found \033[32m$numberofparts\033[0m parts"
+  else
+    # no smallest files
+    echo "\033[31mCould not find a smallest file. Please give this script in the second argument the number of parts that should be in this folder\033[0m"
+  fi
+fi
 
 checkLineForNumber() {
   linenumber=$1
@@ -55,5 +78,7 @@ while read line; do
   partcounter=$(echo "$partcounter + 1" | bc)
 done < names.txt
 
+rm duplicates.txt
+rm raw.txt
 rm names.txt
 rm names_raw.txt
