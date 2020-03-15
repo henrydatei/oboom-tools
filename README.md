@@ -2,6 +2,8 @@
 
 Bundle of shell scripts to manage your OBOOM-account via the OBOOM-api. See [https://www.oboom.com/api/](https://www.oboom.com/api/). You can start then via `sh script.sh` or `./script.sh` (maybe you have to make them executable with `chmod +x script.sh`).
 
+I also made a python version of this repo, see [https://github.com/henrydatei/oboom-tools-python](https://github.com/henrydatei/oboom-tools-python)
+
 For the documentation please visit the wiki!
 
 ## Prerequisites
