@@ -18,16 +18,16 @@ else
 fi
 
 echo "Indexing files ... (This could take up to some minutes, depending on how many files you have)"
-curl -s -d "token=$session" "https://api.oboom.com/1/tree" >> tree.json
+curl -s -d "token=$session" "https://api.oboom.com/1/ls?item=1C" >> tree.json
 i=2
-root=$(cat tree.json | jq ".[1] | .[$i].root")
+root=$(cat tree.json | jq ".[2] | .[$i].root")
 while [ "$root" != "null" ]; do
-  root=$(cat tree.json | jq -r ".[1] | .[$i].root")
-  type=$(cat tree.json | jq -r ".[1] | .[$i].type")
+  root=$(cat tree.json | jq -r ".[2] | .[$i].root")
+  type=$(cat tree.json | jq -r ".[2] | .[$i].type")
   if [ "$root" = "1C" ] && [ "$type" = "file" ]; then
-    name=$(cat tree.json | jq -r ".[1] | .[$i].name")
-    id=$(cat tree.json | jq -r ".[1] | .[$i].id")
-    parent=$(cat tree.json | jq -r ".[1] | .[$i].parent")
+    name=$(cat tree.json | jq -r ".[2] | .[$i].name")
+    id=$(cat tree.json | jq -r ".[2] | .[$i].id")
+    parent=$(cat tree.json | jq -r ".[2] | .[$i].parent")
     echo "Found file in recycle bin: \033[34m$name\033[0m ($id)"
     if [ "$parent" = "1C" ]; then
       # files that are not in a folder will be added to the deleting-queue
@@ -35,8 +35,8 @@ while [ "$root" != "null" ]; do
     fi
   fi
   if [ "$root" = "1C" ] && [ "$type" = "folder" ]; then
-    name=$(cat tree.json | jq -r ".[1] | .[$i].name")
-    id=$(cat tree.json | jq -r ".[1] | .[$i].id")
+    name=$(cat tree.json | jq -r ".[2] | .[$i].name")
+    id=$(cat tree.json | jq -r ".[2] | .[$i].id")
     echo "Found folder in recycle bin: \033[33m$name\033[0m ($id)"
     # add folders to queue for recursive deleting
     echo "$name|$id" >> recycle-bin.txt
